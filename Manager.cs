@@ -11,4 +11,6 @@ namespace ГерасимоваГлазкиSave
     {
         public static Frame MainFrame { get; set; }
     }
+
+
 }
