@@ -22,5 +22,25 @@ namespace ГерасимоваГлазкиSave
     
         public virtual Agent Agent { get; set; }
         public virtual Product Product { get; set; }
+
+
+        public decimal Stoimost
+        {
+            get
+            {
+                decimal s;
+
+                s = Product.MinCostForAgent * this.ProductCount;
+                return s;
+
+
+                /*if(Product != null)
+                {
+                    return Product.MinCostForAgent * ProductCount;
+                }
+                return 0;*/
+            }
+        }
+
     }
 }

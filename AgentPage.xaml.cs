@@ -39,8 +39,10 @@ namespace ГерасимоваГлазкиSave
             ComboType.SelectedIndex = 0;
 
             UpdateAgent();
+          
         }
 
+        
 
         private void ChangePage(int direction, int? selectedPage)
         {
@@ -148,20 +150,22 @@ namespace ГерасимоваГлазкиSave
             {
                 currentAgent = currentAgent.OrderBy(p => p.Title).ToList();
             }
-            if (ComboSort.SelectedIndex == 3) { 
-                //пока что нет
+            if (ComboSort.SelectedIndex == 3) {
+
+                currentAgent = currentAgent.OrderBy(p => p.Discount).ToList();
             }
             if (ComboSort.SelectedIndex == 4)
             {
-                //пока что нет
+                
+                currentAgent = currentAgent.OrderByDescending(p => p.Discount).ToList();
             }
             if (ComboSort.SelectedIndex == 5)
             {
-                currentAgent = currentAgent.OrderByDescending(p => p.Priority).ToList();
+                currentAgent = currentAgent.OrderBy(p => p.Priority).ToList();
             }
             if (ComboSort.SelectedIndex == 6)
             {
-                currentAgent = currentAgent.OrderBy(p=> p.Priority).ToList();
+                currentAgent = currentAgent.OrderByDescending(p => p.Priority).ToList();
             }
 
            //фильтрация по типу
@@ -268,8 +272,60 @@ namespace ГерасимоваГлазкиSave
                 ГерасимоваГлазкиSaveEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
                 ServiceListView.ItemsSource = ГерасимоваГлазкиSaveEntities.GetContext().Agent.ToList();
                 UpdateAgent();
+               
 
             }
         }
+
+        private void ServiceListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ServiceListView.SelectedItems.Count >1)
+                PriorityButton.Visibility = Visibility.Visible;
+            else
+                PriorityButton.Visibility = Visibility.Hidden;
+                
+
+        }
+
+        private void PriorityButton_Click(object sender, RoutedEventArgs e)
+        {
+            int maxprior = 0;
+            foreach (Agent agent in ServiceListView.SelectedItems) {
+                if (agent.Priority > maxprior) {
+                    maxprior = agent.Priority;
+                }
+            }
+            SetWindow myWindow = new SetWindow(maxprior);
+            myWindow.ShowDialog();
+            if (string.IsNullOrEmpty(myWindow.TBPriority.Text) || !int.TryParse(myWindow.TBPriority.Text, out int priorityValue) || priorityValue < 0)
+            {
+                MessageBox.Show("Измнений не произошло");
+            }
+            else
+            {
+                int newPriority = Convert.ToInt32(myWindow.TBPriority.Text);
+
+                foreach (Agent agent in ServiceListView.SelectedItems)
+                {
+                    agent.Priority = newPriority;
+                }
+                try
+                {
+                    ГерасимоваГлазкиSaveEntities.GetContext().SaveChanges();
+                    MessageBox.Show("информация сохранена");
+                    UpdateAgent();
+                }
+                catch (Exception ex) { 
+                    MessageBox.Show(ex.Message.ToString());
+
+
+                }
+
+            }
+
+
+        }
+
+       
     }
 }

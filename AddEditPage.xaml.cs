@@ -39,8 +39,6 @@ namespace ГерасимоваГлазкиSave
 
             LoadAgentTypes();
 
-            
-
         }
 
     private void LoadAgentTypes()
@@ -166,6 +164,12 @@ namespace ГерасимоваГлазкиSave
                 }
             }
 
+
+        }
+
+        private void SaleButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new ProductSalePage(currentAgent));
 
         }
     }
