@@ -43,28 +43,9 @@ namespace ГерасимоваГлазкиSave
                 ProductSaleList.ItemsSource = new List<ProductSale>();
             }
 
-            // Загружаем все продукты и устанавливаем источник данных для ComboBox
             _allProducts = ГерасимоваГлазкиSaveEntities.GetContext().Product.ToList();
             ComboProduct.ItemsSource = _allProducts;
-            /* 
-             InitializeComponent();
-
-             if (SelectedAgent != null)
-             {
-                 currentAgent = SelectedAgent;
-                 DataContext = currentAgent;
-
-                 // Инициализируем список продаж
-                 LoadCurrentProductSales();
-             }
-             else
-             {
-                 ProductSaleList.ItemsSource = new List<ProductSale>();
-             }
-
-             // Загружаем все продукты и устанавливаем источник данных для ComboBox
-             _allProducts = ГерасимоваГлазкиSaveEntities.GetContext().Product.ToList();
-             ComboProduct.ItemsSource = _allProducts;*/
+            
         }
 
 
@@ -121,88 +102,7 @@ namespace ГерасимоваГлазкиSave
             ComboProduct.SelectedItem = null;
             ProductCountTextBox.Clear();
             StartDate.SelectedDate = null;
-            /*// Получаем выбранный продукт из ComboBox
-            var selectedProduct = ComboProduct.SelectedItem as Product;
-
-            // Получаем количество из TextBox (например, для количества продукта)
-            int productCount;
-            if (!int.TryParse(ProductCountTextBox.Text, out productCount) || productCount <= 0)
-            {
-                MessageBox.Show("Пожалуйста, введите корректное количество.");
-                return;
-            }
-
-            if (selectedProduct != null)
-            {
-                // Создаем новый объект ProductSale
-                var newSale = new ProductSale
-                {
-                    AgentID = currentAgent.ID,
-                    ProductID = selectedProduct.ID,
-                    SaleDate = StartDate.SelectedDate ?? DateTime.Now,
-                    ProductCount = productCount
-                };
-
-                // Добавляем новый объект в контекст и сохраняем изменения
-                ГерасимоваГлазкиSaveEntities.GetContext().ProductSale.Add(newSale);
-                ГерасимоваГлазкиSaveEntities.GetContext().SaveChanges();
-
-                MessageBox.Show("Информация сохранена");
-
-                // Обновляем список продаж
-                LoadCurrentProductSales();
-
-                // Очистка полей ввода (по желанию)
-                ComboProduct.SelectedItem = null;
-                ProductCountTextBox.Clear();
-                StartDate.SelectedDate = null;
-            }
-            else
-            {
-                MessageBox.Show("Пожалуйста, выберите продукт для добавления.");
-            }*/
-        
-        /*
-        // Получаем выбранный продукт из ComboBox
-        var selectedProduct = ComboProduct.SelectedItem as Product;
-
-        // Получаем количество из TextBox (например, для количества продукта)
-        int productCount;
-        if (!int.TryParse(ProductCountTextBox.Text, out productCount) || productCount <= 0)
-        {
-            MessageBox.Show("Пожалуйста, введите корректное количество.");
-            return;
-        }
-
-        if (selectedProduct != null)
-        {
-            // Создаем новый объект ProductSale
-            var newSale = new ProductSale
-            {
-                AgentID = currentAgent.ID, // Указываем ID агента
-                ProductID = selectedProduct.ID, // Указываем ID выбранного продукта
-                SaleDate = StartDate.SelectedDate ?? DateTime.Now, // Указываем дату продажи (если выбрана)
-                ProductCount = productCount // Указываем количество, введенное пользователем
-            };
-
-            // Добавляем новый объект в контекст и сохраняем изменения
-            ГерасимоваГлазкиSaveEntities.GetContext().ProductSale.Add(newSale);
-            ГерасимоваГлазкиSaveEntities.GetContext().SaveChanges();
-
-            MessageBox.Show("информация сохранена");
-
-            // Обновляем список продаж
-            LoadCurrentProductSales();
-
-            // Очистка полей ввода (по желанию)
-            ComboProduct.SelectedItem = null;
-            ProductCountTextBox.Clear();
-            StartDate.SelectedDate = null;
-        }
-        else
-        {
-            MessageBox.Show("Пожалуйста, выберите продукт для добавления.");
-        }*/
+            
         }
 
         private void DeleteProduct_Click(object sender, RoutedEventArgs e)

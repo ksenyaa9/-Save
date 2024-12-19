@@ -40,18 +40,26 @@ namespace ГерасимоваГлазкиSave
         {
             get
             {
-                int s = 0;
-                
-                if (Prod > 10000 && Prod < 50000)
-                    s = 5;
-                if (Prod >= 50000 && Prod < 150000)
-                    s = 10;
-                if (Prod >= 150000 && Prod < 500000)
-                    s = 20;
-                if (Prod >=500000 )
-                    s = 25;
-
-                return s;
+                if (Prod < 10000)
+                {
+                    return 0;
+                }
+                else if (Prod < 50000)
+                {
+                    return 5;
+                }
+                else if (Prod < 150000)
+                {
+                    return 10;
+                }
+                else if (Prod < 500000)
+                {
+                    return 20;
+                }
+                else
+                {
+                    return 25;
+                }
             }
         }
 
